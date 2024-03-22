@@ -67,6 +67,24 @@ requestAPI();
 
 ```
 
+如果需要稳定请求, 就不能使用 await
+```js
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function requestAPI() {
+  // 请求完成后等待1秒再进行下一次请求
+  axios.get('http://xxx.com')
+  await delay(1000);
+  requestAPI();
+}
+
+// 立即调用一次requestAPI函数，然后每隔1秒再调用一次
+requestAPI()
+
+```
+
 
 
 ### 什么情况下，你会为你的项目引入状态管理库，比如`Redux`, `Pinia`, 可以简述一下起到了什么作用么？
